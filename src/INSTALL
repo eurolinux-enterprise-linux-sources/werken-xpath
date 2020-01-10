@@ -1,0 +1,6 @@
+
+To build werken.xpath, simply run build.sh from the
+command-line.
+
+For run-time use, you need lib/antlr.jar in your $CLASSPATH,
+along with normal JDOM classes.

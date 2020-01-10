@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<tests>
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="001"
+            start="/"
+            xpath="/">
+
+    <description>
+	Selects the root element (the JDOM Document)
+    </description>
+
+    <results>
+        <root/>
+    </results>
+
+  </testcase>
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="002"
+            start="/"
+            xpath="/Data_Model">
+    <description>
+	Selects the Data_Model element (&lt;Data_Model&gt;)
+    </description>
+
+    <results>
+	<element>
+		<Data_Model/>
+	</element>
+    </results>
+
+  </testcase>
+
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="003"
+            start="/"
+            xpath="/Data_Model/Databases/Database">
+    <description>
+	Selects the Data_Model Databases Database element (&lt;Database&gt;)
+    </description>
+
+    <results>
+	<element>
+		<Database ext_name="Gis" int_name="gis" />
+	</element>
+    </results>
+
+  </testcase>
+
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="004"
+            start="/"
+            xpath="/Data_Model/Databases/Database/Tables/Table">
+    <description>
+	Selects the Table elements (&lt;Table&gt;)
+    </description>
+
+    <results>
+	<element>
+	        <Table ext_name="001 Flurstück" int_name="alk_flurstueck"/>
+	</element>
+	<element>
+		<Table ext_name="001 Flurstück Ausgestaltung"
+		int_name="alk_flurstueck_ausg" />
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="005"
+            start="/"
+            xpath="/Data_Model/Databases/Database/Tables/Table/Fields/Field">
+    <description>
+	Selects the Fields Field elements (&lt;Field&gt;)
+    </description>
+
+    <results>
+	<element>
+		<Field ext_name="Folie" int_name="folie" type="char" />
+	</element>
+	<element>
+		<Field ext_name="OS" int_name="os" type="char" />
+	</element>
+	<element>
+		<Field ext_name="Objekttyp" int_name="objekttyp" type="char" />
+	</element>
+	<element>
+		<Field ext_name="Flurst. Nr. (Zähler)" int_name="flst_nr_zaehler" type="char" />
+	</element>
+	<element>
+		<Field ext_name="Flurst. Nr. (Nenner)" int_name="flst_nr_nenner" type="char" />
+	</element>
+	<element>
+		<Field ext_name="Objektnummer" int_name="objektnummer" type="char" />
+	</element>
+	<element>
+		<Field ext_name="Flurstück" int_name="flurstueck" type="foreign_key" />
+	</element>
+	<element>
+		<Field ext_name="Geometrie" int_name="geometrie" type="geometry" />
+	</element>
+	<element>
+		<Field ext_name="Key Value" int_name="m_magie_key" type="key" />
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="006"
+            start="/"
+            xpath="//Field">
+    <description>
+	Selects the all Field elements (&lt;Field&gt;)
+    </description>
+    <results>
+	<element>
+		<Field ext_name="Folie" int_name="folie" type="char" />
+	</element>
+	<element>
+		<Field ext_name="OS" int_name="os" type="char" />
+	</element>
+	<element>
+		<Field ext_name="Objekttyp" int_name="objekttyp" type="char" />
+	</element>
+	<element>
+		<Field ext_name="Flurst. Nr. (Zähler)" int_name="flst_nr_zaehler" type="char" />
+	</element>
+	<element>
+		<Field ext_name="Flurst. Nr. (Nenner)" int_name="flst_nr_nenner" type="char" />
+	</element>
+	<element>
+		<Field ext_name="Objektnummer" int_name="objektnummer" type="char" />
+	</element>
+	<element>
+		<Field ext_name="Flurstück" int_name="flurstueck" type="foreign_key" />
+	</element>
+	<element>
+		<Field ext_name="Geometrie" int_name="geometrie" type="geometry" />
+	</element>
+	<element>
+		<Field ext_name="Key Value" int_name="m_magie_key" type="key" />
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="007"
+            start="/"
+            xpath="//Field[@int_name='flst_nr_zaehler']">
+    <description>
+	Selects the Field of Flurst. Nr. (Zähler) (&lt;Field&gt;)
+    </description>
+
+    <results>
+	<element>
+		<Field ext_name="Flurst. Nr. (Zähler)" int_name="flst_nr_zaehler" type="char" />
+	</element>
+    </results>
+
+  </testcase>
+
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="008"
+            start="/"
+            xpath="//Table[2]/Fields">
+    <description>
+	Selects the Fields of the 2nd Table (&lt;Fields&gt;)
+    </description>
+
+    <results>
+	<element>
+		<Fields />
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="009"
+            start="/"
+            xpath="//Field[last()]">
+    <description>
+	Selects last Field (&lt;Field&gt;)
+    </description>
+
+    <results>
+	<element>
+		<Field ext_name="Flurst. Nr. (Nenner)"
+		int_name="flst_nr_nenner" type="char" />
+	</element>
+	<element>
+		<Field ext_name="Key Value" int_name="m_magie_key" type="key" />
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="010"
+            start="/"
+            xpath="/Data_Model/Databases/..">
+    <description>
+	Selects the Data_Model (&lt;Data_Model&gt;)
+    </description>
+
+    <results>
+	<element>
+		<Data_Model/>
+	</element>
+    </results>
+
+  </testcase>
+
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="012"
+            start="/"
+            xpath="/Data_Model/Databases/Database[@int_name='gis']">
+    <description>
+	Selects all Databases with int_name=gis (&lt;Database&gt;)
+    </description>
+
+    <results>
+	<element>
+		<Database ext_name="Gis" int_name="gis" />
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="013"
+            start="/"
+            xpath="/Data_Model/Databases/Database/../Database[@int_name='gis']">
+    <description>
+	Selects all Database with int_name=gis (&lt;Database&gt;)
+    </description>
+
+    <results>
+	<element>
+		<Database ext_name="Gis" int_name="gis" />
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="014"
+            start="/"
+            xpath="/Data_Model/Databases/Database/Tables/../Tables/Table/.[@ext_name='001 Flurstück']">
+    <description>
+	Selects all Tables with ext_name=001 Flurstück (&lt;Table&gt;)
+    </description>
+
+    <results>
+	<element>
+		<Table ext_name="001 Flurstück"
+		int_name="alk_flurstueck" />
+	</element>
+    </results>
+
+  </testcase>
+
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="016"
+            start="/"
+            xpath="/Data_Model/Databases/Database/Tables/../Tables/Table/.[@int_name='alk_flurstueck' or @int_name='alk_flurstueck_ausg']">
+    <description>
+	Selects all Tables  (&lt;Table&gt;)
+    </description>
+
+    <results>
+	<element>
+		<Table ext_name="001 Flurstück"
+		int_name="alk_flurstueck" />
+	</element>
+	<element>
+		<Table ext_name="001 Flurstück Ausgestaltung"
+		int_name="alk_flurstueck_ausg" />
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="017"
+            start="/"
+            xpath="//Field/.[@int_name='folie' or @int_name='flurstueck' or @int_name='flst_nr_nenner']">
+    <description>
+	Selects all Fields with int_name=folie or int_name=flurstueck
+	or int_name=flst_nr_nenner(&lt;Field&gt;)
+    </description>
+
+    <results>
+	<element>
+		<Field ext_name="Folie" int_name="folie" type="char" />
+	</element>
+	<element>
+		<Field ext_name="Flurstück" int_name="flurstueck" type="foreign_key" />
+	</element>
+	<element>
+		<Field ext_name="Flurst. Nr. (Nenner)" int_name="flst_nr_nenner" type="char" />
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="018"
+            start="/"
+            xpath="//Table/.[@int_name!='alk_flurstueck_ausg']">
+    <description>
+	Selects all Tables with int_name!=alk_flurstueck_ausg (&lt;Table&gt;)
+    </description>
+
+    <results>
+	<element>
+		<Table ext_name="001 Flurstück"
+		int_name="alk_flurstueck" />
+	</element>
+    </results>
+
+  </testcase>
+
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="020"
+            start="/"
+            xpath="/Data_Model/Databases/Database/Tables/Table/.[@ext_name]">
+    <description>
+	Selects all Tables with extern names
+    </description>
+
+    <results>
+	<element>
+		<Table ext_name="001 Flurstück"
+		int_name="alk_flurstueck" />
+	</element>
+	<element>
+		<Table ext_name="001 Flurstück Ausgestaltung"
+		int_name="alk_flurstueck_ausg" />
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="021"
+            start="/"
+            xpath="//Field[not(@type='char')]">
+    <description>
+	Selects all Fields where type!=char
+    </description>
+
+    <results>
+	<element>
+		<Field ext_name="Flurstück" int_name="flurstueck" type="foreign_key" />
+	</element>
+	<element>
+		<Field ext_name="Geometrie" int_name="geometrie" type="geometry" />
+	</element>
+	<element>
+		<Field ext_name="Key Value" int_name="m_magie_key" type="key" />
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="022"
+            start="/"
+            xpath="/Data_Model/*">
+    <description>
+	Selects all children of Data_Model
+    </description>
+
+    <results>
+	<element>
+		<Databases/>
+	</element>
+    </results>
+
+  </testcase>
+
+
+
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="026"
+            start="/"
+            xpath="//Fields/..">
+    <description>
+	Selects all elements which are parents of a Fields
+    </description>
+
+    <results>
+	<element>
+		<Table ext_name="001 Flurstück" int_name="alk_flurstueck"/>
+	</element>
+	<element>
+		<Table ext_name="001 Flurstück Ausgestaltung" int_name="alk_flurstueck_ausg"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="iso_latin_1_doc.xml"
+            caseID="027"
+            start="/"
+            xpath="//self::node()[Tables]">
+    <description>
+	Selects all elements which have a Tables-Element
+    </description>
+
+    <results>
+	<element>
+		<Database ext_name="Gis" int_name="gis" />
+	</element>
+    </results>
+
+  </testcase>
+
+</tests>
+
+
+
+
+
+

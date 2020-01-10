@@ -1,3 +1,4 @@
-# ELS - Enterprise Linux/EuroLinux Sources - werken-xpath 
+# ELS - Enterprise Linux/EuroLinux Sources - werken-xpath
+ 
 ## Usage:
-  Checkout branch or tag.
+  Checkout branch or tag. Use `make sources` to recreate  SOURCE0 archive.

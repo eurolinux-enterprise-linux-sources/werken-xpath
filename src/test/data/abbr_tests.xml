@@ -1,0 +1,631 @@
+
+<tests>
+  <testcase document="abbr_doc.xml"
+            caseID="001"
+            start="/"
+            xpath="/">
+
+    <description>
+	Selects the root element (the JDOM Document)
+    </description>
+
+    <results>
+        <root/>
+    </results>
+
+  </testcase>
+  <testcase document="abbr_doc.xml"
+            caseID="002"
+            start="/"
+            xpath="/book">
+    <description>
+	Selects the document element (&lt;book&gt;)
+    </description>
+
+    <results>
+	<element>
+		<book id="book-1"/>
+	</element>
+    </results>
+
+  </testcase>
+
+
+  <testcase document="abbr_doc.xml"
+            caseID="003"
+            start="/"
+            xpath="/book/title">
+    <description>
+	Selects the book title element (&lt;title&gt;)
+    </description>
+
+    <results>
+	<element>
+		<title id="book-1-title-1"/>
+	</element>
+    </results>
+
+  </testcase>
+
+
+  <testcase document="abbr_doc.xml"
+            caseID="004"
+            start="/"
+            xpath="/book/chapter">
+    <description>
+	Selects the chapter elements (&lt;chapter&gt;)
+    </description>
+
+    <results>
+	<element>
+		<chapter id="chapter-1"/>
+	</element>
+	<element>
+		<chapter id="chapter-2"/>
+	</element>
+	<element>
+		<chapter id="chapter-3"/>
+	</element>
+	<element>
+		<chapter id="chapter-4"/>
+	</element>
+	<element>
+		<chapter id="chapter-5"/>
+	</element>
+	<element>
+		<chapter id="chapter-6"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="005"
+            start="/"
+            xpath="/book/chapter/title">
+    <description>
+	Selects the chapter title elements (&lt;title&gt;)
+    </description>
+
+    <results>
+	<element>
+		<title id="chapter-1-title-1"/>
+	</element>
+	<element>
+		<title id="chapter-2-title-1"/>
+	</element>
+	<element>
+		<title id="chapter-3-title-1"/>
+	</element>
+	<element>
+		<title id="chapter-4-title-1"/>
+	</element>
+	<element>
+		<title id="chapter-5-title-1"/>
+	</element>
+	<element>
+		<title id="chapter-6-title-1"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="006"
+            start="/"
+            xpath="//title">
+    <description>
+	Selects the all title elements (&lt;title&gt;)
+    </description>
+
+    <results>
+	<element>
+		<title id="book-1-title-1"/>
+	</element>
+	<element>
+		<title id="chapter-1-title-1"/>
+	</element>
+	<element>
+		<title id="chapter-2-title-1"/>
+	</element>
+	<element>
+		<title id="chapter-3-title-1"/>
+	</element>
+	<element>
+		<title id="chapter-4-title-1"/>
+	</element>
+	<element>
+		<title id="chapter-5-title-1"/>
+	</element>
+	<element>
+		<title id="chapter-6-title-1"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="007"
+            start="/"
+            xpath="//title[@id='chapter-2-title-1']">
+    <description>
+	Selects the title of chapter 2 (&lt;title&gt;)
+    </description>
+
+    <results>
+	<element>
+		<title id="chapter-2-title-1"/>
+	</element>
+    </results>
+
+  </testcase>
+
+
+  <testcase document="abbr_doc.xml"
+            caseID="008"
+            start="/"
+            xpath="//chapter[2]/title">
+    <description>
+	Selects the title of the 2nd chapter (&lt;title&gt;)
+    </description>
+
+    <results>
+	<element>
+		<title id="chapter-2-title-1"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="009"
+            start="/"
+            xpath="//chapter[last()]">
+    <description>
+	Selects last chapter (&lt;chapter&gt;)
+    </description>
+
+    <results>
+	<element>
+		<chapter id="chapter-6"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="010"
+            start="/"
+            xpath="/book/chapter/..">
+    <description>
+	Selects the book (&lt;book&gt;)
+    </description>
+
+    <results>
+	<element>
+		<book id="book-1"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="011"
+            start="/"
+            xpath="/book/chapter/../chapter/.">
+    <description>
+	Selects all chapters (&lt;chapter&gt;)
+    </description>
+
+    <results>
+	<element>
+		<chapter id="chapter-1"/>
+	</element>
+	<element>
+		<chapter id="chapter-2"/>
+	</element>
+	<element>
+		<chapter id="chapter-3"/>
+	</element>
+	<element>
+		<chapter id="chapter-4"/>
+	</element>
+	<element>
+		<chapter id="chapter-5"/>
+	</element>
+	<element>
+		<chapter id="chapter-6"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="012"
+            start="/"
+            xpath="/book/chapter[@author='bob']">
+    <description>
+	Selects all chapters with author=bob (&lt;chapter&gt;)
+    </description>
+
+    <results>
+	<element>
+		<chapter id="chapter-1"/>
+	</element>
+	<element>
+		<chapter id="chapter-3"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="013"
+            start="/"
+            xpath="/book/chapter/../chapter[@author='bob']">
+    <description>
+	Selects all chapters with author=bob (&lt;chapter&gt;)
+    </description>
+
+    <results>
+	<element>
+		<chapter id="chapter-1"/>
+	</element>
+	<element>
+		<chapter id="chapter-3"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="014"
+            start="/"
+            xpath="/book/chapter/../chapter/.[@author='bob']">
+    <description>
+	Selects all chapters with author=bob (&lt;chapter&gt;)
+    </description>
+
+    <results>
+	<element>
+		<chapter id="chapter-1"/>
+	</element>
+	<element>
+		<chapter id="chapter-3"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="015"
+            start="/"
+            xpath="/book/chapter/../chapter/.[@author='rebecca']">
+    <description>
+	Selects all chapters with author=rebecca (&lt;chapter&gt;)
+    </description>
+
+    <results>
+	<element>
+		<chapter id="chapter-2"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="016"
+            start="/"
+            xpath="/book/chapter/../chapter/.[@author='bob' or @author='rebecca']">
+    <description>
+	Selects all chapters with author=bob or author=rebecca (&lt;chapter&gt;)
+    </description>
+
+    <results>
+	<element>
+		<chapter id="chapter-1"/>
+	</element>
+	<element>
+		<chapter id="chapter-2"/>
+	</element>
+	<element>
+		<chapter id="chapter-3"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="017"
+            start="/"
+            xpath="/book/chapter/../chapter/.[@author='bob' or @author='rebecca' or @author='james']">
+    <description>
+	Selects all chapters with author=bob or author=rebecca or authorjames(&lt;chapter&gt;)
+    </description>
+
+    <results>
+	<element>
+		<chapter id="chapter-1"/>
+	</element>
+	<element>
+		<chapter id="chapter-2"/>
+	</element>
+	<element>
+		<chapter id="chapter-3"/>
+	</element>
+	<element>
+		<chapter id="chapter-4"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="018"
+            start="/"
+            xpath="/book/chapter/../chapter/.[@author!='bob']">
+    <description>
+	Selects all chapters with author!=bob (&lt;chapter&gt;)
+    </description>
+
+    <results>
+	<element>
+		<chapter id="chapter-2"/>
+	</element>
+	<element>
+		<chapter id="chapter-4"/>
+	</element>
+	<element>
+		<chapter id="chapter-5"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="019"
+            start="/"
+            xpath="/book/chapter/../chapter/.[@author!='bob'][@author!='rebecca']">
+    <description>
+	Selects all chapters with author!=bob AND author!=rebecca (&lt;chapter&gt;)
+    </description>
+
+    <results>
+	<element>
+		<chapter id="chapter-4"/>
+	</element>
+	<element>
+		<chapter id="chapter-5"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="020"
+            start="/"
+            xpath="/book/chapter/../chapter/.[@author]">
+    <description>
+	Selects all chapters with authors
+    </description>
+
+    <results>
+	<element>
+		<chapter id="chapter-1"/>
+	</element>
+	<element>
+		<chapter id="chapter-2"/>
+	</element>
+	<element>
+		<chapter id="chapter-3"/>
+	</element>
+	<element>
+		<chapter id="chapter-4"/>
+	</element>
+	<element>
+		<chapter id="chapter-5"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="021"
+            start="/"
+            xpath="/book/chapter/../chapter/.[not(@author)]">
+    <description>
+	Selects all chapters without authors
+    </description>
+
+    <results>
+	<element>
+		<chapter id="chapter-6"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="022"
+            start="/"
+            xpath="/book/*">
+    <description>
+	Selects all children a book
+    </description>
+
+    <results>
+	<element>
+		<title id="book-1-title-1"/>
+	</element>
+	<element>
+		<chapter id="chapter-1"/>
+	</element>
+	<element>
+		<chapter id="chapter-2"/>
+	</element>
+	<element>
+		<chapter id="chapter-3"/>
+	</element>
+	<element>
+		<chapter id="chapter-4"/>
+	</element>
+	<element>
+		<chapter id="chapter-5"/>
+	</element>
+	<element>
+		<chapter id="chapter-6"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="023"
+            start="/"
+            xpath="/book/*[title]">
+    <description>
+	Selects all children of book which have a title
+    </description>
+
+    <results>
+	<element>
+		<chapter id="chapter-1"/>
+	</element>
+	<element>
+		<chapter id="chapter-2"/>
+	</element>
+	<element>
+		<chapter id="chapter-3"/>
+	</element>
+	<element>
+		<chapter id="chapter-4"/>
+	</element>
+	<element>
+		<chapter id="chapter-5"/>
+	</element>
+	<element>
+		<chapter id="chapter-6"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="024"
+            start="/"
+            xpath="/book/*[title][@author='james']">
+    <description>
+	Selects all children of book which have a title, and are written by james
+    </description>
+
+    <results>
+	<element>
+		<chapter id="chapter-4"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="025"
+            start="/"
+            xpath="/book/*[self::title or child::title]">
+    <description>
+	Selects all children of book which have or are a title
+    </description>
+
+    <results>
+	<element>
+		<title id="book-1-title-1"/>
+	</element>
+	<element>
+		<chapter id="chapter-1"/>
+	</element>
+	<element>
+		<chapter id="chapter-2"/>
+	</element>
+	<element>
+		<chapter id="chapter-3"/>
+	</element>
+	<element>
+		<chapter id="chapter-4"/>
+	</element>
+	<element>
+		<chapter id="chapter-5"/>
+	</element>
+	<element>
+		<chapter id="chapter-6"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="026"
+            start="/"
+            xpath="//title/..">
+    <description>
+	Selects all elements which are parents of a title
+    </description>
+
+    <results>
+	<element>
+		<book id="book-1"/>
+	</element>
+	<element>
+		<chapter id="chapter-1"/>
+	</element>
+	<element>
+		<chapter id="chapter-2"/>
+	</element>
+	<element>
+		<chapter id="chapter-3"/>
+	</element>
+	<element>
+		<chapter id="chapter-4"/>
+	</element>
+	<element>
+		<chapter id="chapter-5"/>
+	</element>
+	<element>
+		<chapter id="chapter-6"/>
+	</element>
+    </results>
+
+  </testcase>
+
+  <testcase document="abbr_doc.xml"
+            caseID="027"
+            start="/"
+            xpath="//self::node()[title]">
+    <description>
+	Selects all elements which have a title
+    </description>
+
+    <results>
+	<element>
+		<book id="book-1"/>
+	</element>
+	<element>
+		<chapter id="chapter-1"/>
+	</element>
+	<element>
+		<chapter id="chapter-2"/>
+	</element>
+	<element>
+		<chapter id="chapter-3"/>
+	</element>
+	<element>
+		<chapter id="chapter-4"/>
+	</element>
+	<element>
+		<chapter id="chapter-5"/>
+	</element>
+	<element>
+		<chapter id="chapter-6"/>
+	</element>
+    </results>
+
+  </testcase>
+
+</tests>

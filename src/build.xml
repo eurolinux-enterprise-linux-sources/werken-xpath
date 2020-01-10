@@ -1,0 +1,273 @@
+<project default="package" basedir=".">
+
+  <!-- =================================================================== -->
+  <!-- Initialization target                                               -->
+  <!-- =================================================================== -->
+
+  <target name="init">
+    <tstamp/>
+    <property name="Name" value="werken.xpath"/>
+    <property name="name" value="werken.xpath"/>
+    <property name="version" value="0.9.4"/>
+    <property name="quality" value="beta"/>
+    <property name="year" value="2000"/>
+
+    <echo message="----------- ${Name} ${version} ${quality} [ Copyright ${year}. All Rights Reserved. ] ------------"/>
+
+    <property name="build.compiler" value="classic"/>
+    <property name="debug" value="on"/>
+    <property name="optimize" value="on"/>
+    <property name="deprecation" value="on"/>
+
+    <property name="src.dir" value="./src"/>
+    <property name="lib.dir" value="./lib"/>
+    <property name="packages" value="com.werken.*"/>
+
+    <property name="build.dir" value="./build"/>
+    <property name="build.src" value="./build/src"/>
+    <property name="build.dest" value="./build/classes"/>
+    <property name="build.javadocs" value="./build/apidocs"/>
+
+    <property name="xpath.parser.dir" value="${build.src}/com/werken/xpath/parser"/>
+
+    <property name="dist.root" value="./dist"/>
+    <property name="dist.dir" value="${dist.root}/${name}-${version}"/>
+
+    <filter token="year" value="${year}"/>
+    <filter token="version" value="${version}"/>
+    <filter token="date" value="${TODAY}"/>
+    <filter token="log" value="true"/>
+    <filter token="verbose" value="true"/>
+
+    <property name="test.src.dir" value="./test/src"/>
+    <property name="test.build.dir" value="./build/test/"/>
+    <property name="test.build.src" value="./build/test/src"/>
+    <property name="test.build.dest" value="./build/test/classes"/>
+
+    <property name="junit.jar" value="${lib.dir}/junit.jar"/>
+
+    <!-- JDK1.1 collections -->
+    <property name="coll.import" value="com.sun.java.util.collections"/>
+    <available classname="${coll.import}.Collection" property="coll.present"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Help on usage                                                       -->
+  <!-- =================================================================== -->
+  <target name="usage">
+    <echo message=""/>
+    <echo message=""/>
+    <echo message="werken.xpath build file"/>
+    <echo message="-------------------------------------------------------------"/>
+    <echo message=""/>
+    <echo message=" available targets are:"/>
+    <echo message=""/>
+    <echo message="   package  --> generates the werken.xpath.jar file (default)"/>
+    <echo message="   compile  --> compiles the contributed source code"/>
+    <echo message="   samples  --> compiles the contributed samples"/>
+    <echo message="   javadoc  --> generates the API documentation (java 1.2 only)"/>
+    <echo message="   clean    --> restores the distribution to its clean state"/>
+    <echo message=""/>
+    <echo message=" See the comments inside the build.xml file for more details."/>
+    <echo message="-------------------------------------------------------------"/>
+    <echo message=""/>
+    <echo message=""/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Prepares the build directory                                        -->
+  <!-- =================================================================== -->
+  <target name="prepare" depends="init">
+    <mkdir dir="${build.dir}"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Prepares the source code                                            -->
+  <!-- =================================================================== -->
+  <target name="prepare-src" depends="prepare">
+    <!-- create directories -->
+    <mkdir dir="${build.src}"/>
+    <mkdir dir="${build.dest}"/>
+
+    <!-- copy src files -->
+
+    <copy todir="${build.src}">
+        <fileset dir="${src.dir}"/>
+    </copy>
+
+  </target>
+
+  <target name="prepare-grammars" depends="prepare-src">
+    <java fork="yes"
+          classname="antlr.Tool">
+        <classpath>
+            <pathelement path="${java.class.path}"/>
+        </classpath>
+        <arg value="-o"/> 
+        <arg value="${xpath.parser.dir}"/>
+        <arg value="${xpath.parser.dir}/xpath.g"/>
+    </java>
+
+    <java fork="yes"
+          classname="antlr.Tool">
+        <classpath>
+            <pathelement path="${java.class.path}"/>
+        </classpath> 
+        <arg value="-o"/> 
+        <arg value="${xpath.parser.dir}"/>
+        <arg value="${xpath.parser.dir}/xpath_lexer.g"/>
+    </java>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Prepares the test source code                                       -->
+  <!-- =================================================================== -->
+
+  <target name="prepare-test" depends="init">
+    <mkdir dir="${test.build.dir}"/>
+  </target>
+
+  <target name="prepare-test-src" depends="prepare-test">
+
+    <mkdir dir="${test.build.src}"/>
+    <mkdir dir="${test.build.dest}"/>
+
+    <copy todir="${test.build.src}">
+        <fileset dir="${test.src.dir}"/>
+    </copy>
+
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Does replacement on files for dealing with collections.             -->
+  <!-- XXX The efficiency could be improved here; all replacements should  -->
+  <!-- XXX happen during one read/write phase and only for files that have -->
+  <!-- XXX changed.                                                        -->
+  <!-- =================================================================== -->
+  <target name="collections" if="coll.present" depends="prepare-grammars">
+    <replace dir="${build.src}" includes="org/**"
+             token="java.util.Collection" value="${coll.import}.Collection"/>
+    <replace dir="${build.src}" includes="org/**"
+             token="java.util.Map" value="${coll.import}.Map"/>
+    <replace dir="${build.src}" includes="org/**"
+             token="java.util.HashMap" value="${coll.import}.HashMap"/>
+    <replace dir="${build.src}" includes="org/**"
+             token="java.util.List" value="${coll.import}.List"/>
+    <replace dir="${build.src}" includes="org/**"
+             token="java.util.LinkedList" value="${coll.import}.LinkedList"/>
+    <replace dir="${build.src}" includes="org/**"
+             token="java.util.Iterator" value="${coll.import}.Iterator"/>
+    <replace dir="${build.src}" includes="org/**"
+             token="java.util.ArrayList" value="${coll.import}.ArrayList"/>
+    <!-- The following replace handles the "import java.util.*" case by    -->
+    <!-- adding an "import com.sun.java.util.collections.*" after it.      -->
+    <!-- BTW, \u000a is the Unicode escape for a new line. (jhunter)       -->
+    <replace dir="${build.src}" includes="org/**"
+             token="java.util.*" 
+             value="java.util.*;\u000aimport ${coll.import}.*"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Compiles the source directory                                       -->
+  <!-- =================================================================== -->
+  <target name="compile" depends="prepare-grammars,collections">
+    <javac srcdir="${build.src}"
+           destdir="${build.dest}"
+           debug="${debug}"
+           optimize="${optimize}">
+    </javac>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Compiles the test directory                                         -->
+  <!-- =================================================================== -->
+
+  <target name="compile-test" depends="package,prepare-test-src">
+    <javac srcdir="${test.build.src}"
+           destdir="${test.build.dest}"
+           debug="${debug}"
+           classpath="${java.class.path}:${build.dir}/${name}.jar:${junit.jar}" 
+           optimize="${optimize}">
+    </javac>
+  </target>
+  <!-- =================================================================== -->
+  <!-- Creates the class package                                           -->
+  <!-- =================================================================== -->
+  <target name="package" depends="compile">
+    <jar jarfile="${build.dir}/${name}.jar"
+         basedir="${build.dest}"
+         includes="com/**"/>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Creates the API documentation                                       -->
+  <!-- =================================================================== -->
+  <target name="javadoc" depends="prepare-grammars">
+    <mkdir dir="${build.javadocs}"/>
+    <javadoc packagenames="${packages}"
+             sourcepath="${build.src}"
+             destdir="${build.javadocs}"
+             author="true"
+             version="true"
+             use="true"
+             splitindex="true"
+             noindex="false"
+             windowtitle="${Name} API"
+             doctitle="${Name}"
+	     overview="${src.dir}/com/werken/xpath/overview.html"
+             bottom="Copyright &#169; ${year} bob mcwhirter and The Werken &amp; Sons Company.  All Rights Reserved."
+    />
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Clean targets                                                       -->
+  <!-- =================================================================== -->
+  <target name="clean" depends="init">
+    <delete dir="${build.dir}"/>
+    <delete>
+      <fileset dir="." includes="**/*~" />
+    </delete>
+  </target>
+
+  <target name="distclean" depends="clean">
+    <delete dir="${dist.root}"/>
+    <delete>
+      <fileset defaultexcludes="no" dir="." includes="**/*~" />
+    </delete>
+  </target>
+
+  <!-- =================================================================== -->
+  <!-- Dist targets                                                        -->
+  <!-- =================================================================== -->
+
+  <target name="prepare-dist" depends="init">
+    <mkdir dir="${dist.root}"/>
+  </target>
+
+  <target name="full-dist" depends="package,javadoc,prepare-dist">
+    <tar tarfile="${dist.root}/${name}-${version}-${quality}-full.tar" 
+         basedir="../">
+      <include name="${name}/**"/>
+      <exclude name="${name}/**/*.gz"/>
+    </tar>
+    <gzip zipfile="${dist.root}/${name}-${version}-${quality}-full.tar.gz"
+          src="${dist.root}/${name}-${version}-${quality}-full.tar"/>
+    <delete file="${dist.root}/${name}-${version}-${quality}-full.tar"/>
+  </target>
+
+  <target name="src-dist" depends="distclean,prepare-dist">
+    <tar tarfile="${dist.root}/${name}-${version}-${quality}-src.tar" 
+         basedir="../">
+      <include name="${name}/**"/>
+      <exclude name="${name}/**/*.gz"/>
+    </tar>
+    <gzip zipfile="${dist.root}/${name}-${version}-${quality}-src.tar.gz"
+          src="${dist.root}/${name}-${version}-${quality}-src.tar"/>
+    <delete file="${dist.root}/${name}-${version}-${quality}-src.tar"/>
+  </target>
+
+  <target name="all-dists" depends="src-dist,full-dist"/>
+
+</project>
+
+<!-- End of file -->
